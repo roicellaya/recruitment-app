@@ -1,0 +1,28 @@
+<section id="indicators-view" class="mainbar">
+  <section class="matter">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <h2>{{ vm.title }}</h2>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-3">
+          <input type="text" class="form-control" placeholder="Indique la ubicación"
+                 ng-model="vm.query.location" />
+        </div>
+
+        <div class="col-xs-3">
+          <button type="button" class="btn btn-primary" ng-click="vm.searchUsers()">Buscar</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xs-12">
+          <ul class="list-group">
+            <li class="list-group-item" ng-repeat="user in vm.users">{{ user.login }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+</section>

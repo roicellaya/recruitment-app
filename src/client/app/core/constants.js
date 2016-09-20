@@ -5,5 +5,6 @@
   angular
     .module('app.core')
     .constant('toastr', toastr)
-    .constant('moment', moment);
+    .constant('moment', moment)
+    .constant('GITHUB_USERS_URI', 'https://api.github.com/');
 })();
