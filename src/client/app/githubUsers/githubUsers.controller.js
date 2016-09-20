@@ -27,10 +27,28 @@
     activate();
 
     function searchUsers() {
-      githubUsersService.getByQuery({q: 'location:' + vm.query.location}).$promise
+      var query = flattenQuery(vm.query);
+console.log(query);
+      githubUsersService.getByQuery({q: query}).$promise
       .then(function byQuery(queries) {
         vm.users = queries.items;
       });
+    }
+
+    function flattenQuery(query) {
+      var flattened = '';
+
+      for (var keys = Object.keys(query), index = 0, end = keys.length; index < end; index++) {
+        var key = keys[index];
+
+        if (query[key].length > 0) {
+          flattened = flattened + key + ':' + query[key] + '+';
+        }
+      }
+
+      flattened = flattened.slice(0, -1);
+
+      return flattened;
     }
   }
 })();

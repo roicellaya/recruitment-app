@@ -21,14 +21,30 @@
 
   core.config(configure);
 
-  configure.$inject = ['$logProvider', 'routerHelperProvider', 'exceptionHandlerProvider'];
+  configure.$inject = ['$logProvider', 'routerHelperProvider', 'exceptionHandlerProvider', '$httpProvider'];
   /* @ngInject */
-  function configure($logProvider, routerHelperProvider, exceptionHandlerProvider) {
+  function configure($logProvider, routerHelperProvider, exceptionHandlerProvider, $httpProvider) {
     if ($logProvider.debugEnabled) {
       $logProvider.debugEnabled(true);
     }
     exceptionHandlerProvider.configure(config.appErrorPrefix);
     routerHelperProvider.configure({ docTitle: config.appTitle + ': ' });
+
+    $httpProvider.interceptors.push(function($q) {
+      var realEncodeURIComponent = window.encodeURIComponent;
+      return {
+        'request': function(config) {
+           window.encodeURIComponent = function(input) {
+             return realEncodeURIComponent(input).split("%2B").join("+"); 
+           }; 
+           return config || $q.when(config);
+        },
+        'response': function(config) {
+           window.encodeURIComponent = realEncodeURIComponent;
+           return config || $q.when(config);
+        }
+      };
+    });
   }
 
 })();

@@ -13,6 +13,18 @@
         </div>
 
         <div class="col-xs-3">
+          <input type="text" class="form-control"
+                 placeholder="Indique el número de seguidores que debe tener el usuario"
+                 ng-model="vm.query.followers" />
+        </div>
+
+        <div class="col-xs-3">
+          <input type="text" class="form-control"
+                 placeholder="Indique el lenguaje de programación"
+                 ng-model="vm.query.language" />
+        </div>
+
+        <div class="col-xs-3">
           <button type="button" class="btn btn-primary" ng-click="vm.searchUsers()">Buscar</button>
         </div>
       </div>
