@@ -31,7 +31,12 @@
       <div class="row">
         <div class="col-xs-12">
           <ul class="list-group">
-            <li class="list-group-item" ng-repeat="user in vm.users">{{ user.login }}</li>
+            <li class="list-group-item" ng-repeat="user in vm.users">
+              {{ user.login }}
+              <a href="#" class="pull-right" ng-click="vm.addToFavorite(user)">
+                <img src="/images/star-black.png" style="width: 22px; height: auto;" />
+              </a>
+            </li>
           </ul>
         </div>
       </div>

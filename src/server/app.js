@@ -11,6 +11,17 @@ var four0four = require('./utils/404')();
 
 var environment = process.env.NODE_ENV;
 
+var mongoose = require('mongoose');
+
+var url = 'mongodb://localhost:27017/recruitment';
+mongoose.connect(url);
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'connection error:'));
+db.once('open', function () {
+    // we're connected!
+    console.log("Connected correctly to server");
+});
+
 app.use(favicon(__dirname + '/favicon.ico'));
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());

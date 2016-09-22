@@ -12,6 +12,7 @@
     var vm = this;
     vm.title = 'Usuarios de github';
     vm.searchUsers = searchUsers;
+    vm.addToFavorite = addToFavorite;
     vm.query = {};
 
     vm.users = [];
@@ -28,7 +29,7 @@
 
     function searchUsers() {
       var query = flattenQuery(vm.query);
-console.log(query);
+
       githubUsersService.getByQuery({q: query}).$promise
       .then(function byQuery(queries) {
         vm.users = queries.items;
@@ -49,6 +50,10 @@ console.log(query);
       flattened = flattened.slice(0, -1);
 
       return flattened;
+    }
+
+    function addToFavorite(user) {
+      console.log(user);
     }
   }
 })();
