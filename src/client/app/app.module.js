@@ -8,6 +8,7 @@
     'app.dashboard',
     'app.layout',
     'app.githubUsers',
+    'app.favorites',
     'ngResource'
   ]);
 

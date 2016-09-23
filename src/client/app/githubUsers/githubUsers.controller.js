@@ -5,10 +5,10 @@
     .module('app.githubUsers')
     .controller('GithubUsersController', GithubUsersController);
 
-  GithubUsersController.$inject = ['githubUsersService'];
+  GithubUsersController.$inject = ['githubUsersService', 'favoritesService'];
 
   /* @ngInject */
-  function GithubUsersController(githubUsersService) {
+  function GithubUsersController(githubUsersService, favoritesService) {
     var vm = this;
     vm.title = 'Usuarios de github';
     vm.searchUsers = searchUsers;
@@ -54,6 +54,20 @@
 
     function addToFavorite(user) {
       console.log(user);
+      var newUser = {};
+
+      newUser.idGithub = user.id
+      newUser.login = user.login;
+
+      favoritesService.post(newUser).$promise
+      .then(function result(res) {
+        console.log(res);
+        if(res.status === 200) {
+          toastr.success('Usuario agregado a favoritos correctamente');
+        } else {
+          toastr.error('Error al agregar usuario');
+        }
+      });
     }
   }
 })();

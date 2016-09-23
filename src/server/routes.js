@@ -40,9 +40,12 @@ function getFavorites(req, res, next) {
 
 function postFavorites(req, res, next) {
   Favorites.create(req.body, function(err, favorite) {
-    if (err) throw err;
-    console.log('Favorite created!');
-
-    res.json(favorite);
+    if (err && err.code === 11000) {
+      console.log(err);
+      res.json({status: 409, message: 'Usuario duplicado'});
+    } else {
+      console.log('Favorite created!');
+      res.json({status: 200, user: favorite});
+    }
   });
 }
