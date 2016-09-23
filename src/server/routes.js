@@ -35,7 +35,15 @@ function getPerson(req, res, next) {
 }
 
 function getFavorites(req, res, next) {
-  res.status(200).send(data.people);
+  Favorites.find({}, function(err, favorites) {
+    if (err) {
+      console.log(err);
+      res.json({status: 400, message: 'Error al obtener favoritos'});
+    } else {
+      console.log('Favorites listed!');
+      res.json({status: 200, favorites: favorites});
+    }
+  })
 }
 
 function postFavorites(req, res, next) {
