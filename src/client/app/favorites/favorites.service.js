@@ -12,8 +12,7 @@
     var service = $resource(API_URI + 'favorites', {},
     {
       get: {
-        method: 'GET',
-        isArray: true
+        method: 'GET'
       },
       post: {
         method: 'POST'

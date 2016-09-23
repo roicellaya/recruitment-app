@@ -5,12 +5,13 @@
     .module('app.favorites')
     .controller('FavoritesController', FavoritesController);
 
-  FavoritesController.$inject = [];
+  FavoritesController.$inject = ['favoritesService'];
 
   /* @ngInject */
-  function FavoritesController() {
+  function FavoritesController(favoritesService) {
     var vm = this;
     vm.title = 'Favoritos';
+    vm.favorites = [];
 
     activate();
 
@@ -18,6 +19,11 @@
 
     function activate() {
       console.log('Favoritos activado!');
+
+      favoritesService.get().$promise
+      .then(function getFavorites(result) {
+        vm.favorites = result.favorites;
+      });
     }
   }
 })();
